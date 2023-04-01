@@ -4,7 +4,7 @@ import android.util.Log
  * The function for implementation of Log.
  *
  * @author Rajat Sarangal
- * @since March 06, 2022
+ * @since April 01, 2023
  * @link https://github.com/thesarangal/LoggerUtil
  * */
 
@@ -16,18 +16,22 @@ enum class LogType {
 }
 
 /**
- * Print Logs
+ * A utility function to log messages with different log levels.
  *
- * @param tag TAG
- * @param message the detail message string
- * @param type Type of Log [LogType]
- * */
-fun logger(tag: String = "", message: String?, type: LogType = LogType.DEBUG) {
+ * @param tag a tag to identify the log source
+ * @param message the log message
+ * @param type the type of log message [LogType] (VERBOSE, WARNING, DEBUG, INFO, or ERROR)
+ */
+fun logger(
+    tag: String = "",
+    message: String = "",
+    type: LogType = LogType.DEBUG
+) {
 
     // For Better Filter
     val tagFilter = "### $tag"
 
-    if (BuildConfig.DEBUG && message != null) {
+    if (BuildConfig.DEBUG && message.isNotBlank()) {
         when (type) {
             LogType.VERBOSE -> Log.v(tagFilter, message)
             LogType.DEBUG -> Log.d(tagFilter, message)
